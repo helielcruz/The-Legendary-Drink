@@ -2,8 +2,8 @@
 
 # HOW TO RUN THE PROJECT?
 
-# npm install --global yarn
+# 1 - npm install --global yarn
 
-# yarn install
+# 2 - yarn install
 
-# yarn run dev
+# 3 - yarn run dev
