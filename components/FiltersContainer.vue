@@ -24,9 +24,10 @@
 <script setup lang="ts">
 import { CocktailsRequests } from "../api/cocktail/requests/cocktails-requests";
     
-    let selectedCategorie = ref('')
+    let selectedCategorie = ref('Other / Unknown')
     let search = ref('')
-    // let responseCategory = ref({})
+
+    onMounted(()=> getDrinksByCategory())
 
     let drinks = useDrinks()
 
