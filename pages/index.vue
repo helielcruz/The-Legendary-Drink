@@ -1,8 +1,7 @@
 <template>
     <div>
-        <UContainer>
-            <FiltersContainer/>
-        </UContainer>
+        <FiltersContainer/>
+        
         <DrinksContainer/>
         <!-- {{ drinks }} -->
     </div>
