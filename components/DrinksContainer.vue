@@ -7,7 +7,7 @@
                         <h2>{{ drink.strDrink.toUpperCase() }}</h2>
                     </div>
                     <UContainer class=" relative m-0 pl-0 pr-0 p-0 h-5/6 lg:pr-0 lg:pl-0 transition-all transform duration-500 ease-in-out opacity-100"
-                        v-if="seeMore.enabled && seeMore.drinkName === drink.strDrink">
+                        v-if="seeMore && drinkId == drink.idDrink">
                         <div
                             :style="{ backgroundImage: `url(${cocktail.data.drinks[0].strDrinkThumb})` }" 
                             class="h-full p-4 max-w-full flex flex-col rounded-t-md text-zinc-800">
@@ -18,9 +18,9 @@
                     <img v-else class=" rounded-t-md shadow-rose-600 object-cover transition-opacity duration-500 ease-in-out opacity-50 hover:opacity-100" 
                         :src="drink.strDrinkThumb" alt="drink image">
                     <button
-                        @click="seeMoreEnable(drink.strDrink, drink.idDrink)"
+                        @click="seeMoreEnable(drink.idDrink)"
                         class=" hover:bg-emerald-600 text-violet-400 bg-transparent border-solid border-2 pt-1 pb-1 border-violet-400">
-                        {{ seeMore.enabled && seeMore.drinkName === drink.strDrink? 'See less' : 'See more' }}
+                        {{ seeMore && drinkId == drink.idDrink? 'See less' : 'See more' }}
                     </button>
                 </div>           
             </div>
@@ -46,7 +46,8 @@
     import { CocktailsRequests } from '../api/cocktail/requests/cocktails-requests'
     
     let itemsPerPage = 6
-    let seeMore = ref({enabled: false, drink: ''})
+    let seeMore = ref(false)
+    let drinkId = ref(0)
     let drinks = useDrinks()
     let drinksPerPage = ref(Array.from(drinks.value).slice(0, itemsPerPage))
     let begin = ref(true)
@@ -93,12 +94,11 @@
         drinksPerPage.value = drinks.value.slice(start, end)
     }
 
-    async function seeMoreEnable(drinkName, cocktailId) {
+    async function seeMoreEnable(cocktailId) {
         await getCocktailInformations(cocktailId)
-        seeMore.value = {
-            enabled: seeMore.value.enabled && drinkName === seeMore.value.strDrink? false: true,
-            drinkName: seeMore.value.drinkName = drinkName
-        }
+        seeMore.value = seeMore.value && drinkId.value == cocktailId ? false: true,
+        drinkId.value = cocktailId
+        console.log(drinkId.value);
     }
 
     async function getCocktailInformations(cocktailId) {
