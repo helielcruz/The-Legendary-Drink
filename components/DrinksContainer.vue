@@ -2,7 +2,7 @@
     <div>
         <UContainer>
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 bg-transparent border-solid border-2 rounded-md pt-1 pb-1 border-violet-400">
-                <div class="flex flex-col h-full m-2 p-2" v-for="drink of drinksPerPage" :key="drink">
+                <div class="flex flex-col h-full m-2 p-2" v-for="drink of drinksPerPage" :key="drink.idDrink">
                     <div class=" font-bold text-slate-400  shadow-black " >
                         <h2>{{ drink.strDrink.toUpperCase() }}</h2>
                     </div>
@@ -13,15 +13,22 @@
                             class="h-full p-4 max-w-full flex flex-col rounded-t-md text-zinc-800">
                             <span class=" z-10 font-semibold">Instructions: {{cocktail.data.drinks[0].strInstructions}}</span>
                         </div>
-                        <div class="rounded-t-md absolute inset-0 bg-white bg-opacity-50"></div>
+                        <div class="rounded-r-lg absolute inset-0 bg-white bg-opacity-50"></div>
                     </UContainer >
-                    <img v-else class=" rounded-t-md shadow-rose-600 object-cover transition-opacity duration-500 ease-in-out opacity-50 hover:opacity-100" 
+                    <img v-else class=" rounded-r-lg shadow-rose-600 object-cover transition-opacity duration-500 ease-in-out opacity-50 hover:opacity-100" 
                         :src="drink.strDrinkThumb" alt="drink image">
-                    <button
-                        @click="seeMoreEnable(drink.idDrink)"
-                        class=" hover:bg-emerald-600 text-violet-400 bg-transparent border-solid border-2 pt-1 pb-1 border-violet-400">
-                        {{ seeMore && drinkId == drink.idDrink? 'See less' : 'See more' }}
-                    </button>
+                    <div class="relative m-0 pl-0 pr-0 p-0 h-5/6 lg:pr-0 lg:pl-0">
+                        <div class="grid grid-cols-6 gap-4 justify-between items-center">
+                            <button
+                                @click="seeMoreEnable(drink.idDrink)"
+                                class=" col-start-1 col-span-5 p-4 max-w-full grid hover:bg-emerald-600 text-violet-400 bg-transparent border-solid border-2 pt-1 pb-1 border-violet-400">
+                                <h4 class="">{{ seeMore && drinkId == drink.idDrink? 'See less' : 'See more' }}</h4>
+                                
+                            </button>
+                            <font-awesome-icon v-if="favoritesVerify(drink.idDrink)" @click="removeFavorite(drink)" class="col-start-6 inset-0 z-10 text-2xl text-rose-600" icon="fa-solid fa-heart" />
+                            <font-awesome-icon v-else  @click="addFavorite(drink)" class="col-start-6 inset-0 z-10 text-2xl hover:text-rose-600" icon="fa-regular fa-heart" />
+                        </div>
+                    </div>
                 </div>           
             </div>
             <div>
@@ -42,25 +49,51 @@
     </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
     import { CocktailsRequests } from '../api/cocktail/requests/cocktails-requests'
+
+    const { $toast } = useNuxtApp()
+    
     
     let itemsPerPage = 6
     let seeMore = ref(false)
-    let drinkId = ref(0)
+    let drinkId = ref('0')
     let drinks = useDrinks()
     let drinksPerPage = ref(Array.from(drinks.value).slice(0, itemsPerPage))
+    let favorites = useFavorite()
     let begin = ref(true)
     let previous = ref(true)
     let next = ref(false)
     let page = ref(0)
     let cocktail = ref()
 
-    watch(drinks, async (newDrinks, oldDrinks) => {
+    watch(drinks, async (newDrinks) => {
         drinksPerPage.value = Array.from(newDrinks).slice(0, itemsPerPage)
     })
+
+    async function addFavorite(drink: any) {
+        favorites.value.push(drink)
+        $toast.success(`${drink.strDrink} adicionado aos favoritos`)
+    }
+    async function removeFavorite(drink: any) {
+        favorites.value = favorites.value.filter(drinks => drinks.idDrink !== drink.idDrink)
+        $toast.error(`${drink.strDrink} removido dos favoritos`)
+    }
+    let favoritesVerify = (idDrink: string) => {
+        return favorites.value.find((drink: any) => drink.idDrink == idDrink) !== undefined
+    }
     
-    async function pagination(value) {
+    async function seeMoreEnable(cocktailId: string) {
+        await getCocktailInformations(cocktailId)
+        seeMore.value = seeMore.value && drinkId.value == cocktailId ? false: true,
+        drinkId.value = cocktailId
+    }
+
+    async function getCocktailInformations(cocktailId: string) {
+        cocktail.value = await new CocktailsRequests().cocktailById(cocktailId)
+    }
+
+    async function pagination(value: number) {
         switch(value) {
             case 1:
                 page.value = 0
@@ -85,23 +118,12 @@
                 } else {
                     next.value = true
                 }
-
         }
     }
-    function slicePage(page) {
+    function slicePage(page: number) {
         let start = page * itemsPerPage;
         let end = start + itemsPerPage;
         drinksPerPage.value = drinks.value.slice(start, end)
     }
 
-    async function seeMoreEnable(cocktailId) {
-        await getCocktailInformations(cocktailId)
-        seeMore.value = seeMore.value && drinkId.value == cocktailId ? false: true,
-        drinkId.value = cocktailId
-        console.log(drinkId.value);
-    }
-
-    async function getCocktailInformations(cocktailId) {
-        cocktail.value = await new CocktailsRequests().cocktailById(cocktailId)
-    }
 </script>
