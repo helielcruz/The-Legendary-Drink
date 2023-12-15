@@ -3,7 +3,6 @@
         <FiltersContainer/>
         
         <DrinksContainer/>
-        <!-- {{ drinks }} -->
     </div>
 </template>
 
