@@ -23,6 +23,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/vue-fontawesome": "^3.0.5",
     "@nuxt/ui": "^2.11.1",
-    "axios": "^1.6.2"
+    "axios": "^1.6.2",
+    "vue3-toastify": "^0.1.14"
   }
 }
