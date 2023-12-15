@@ -57,42 +57,37 @@
 
     const { $toast } = useNuxtApp()
     const { errorsVerify } = useErrors()
+    const { addFavoriteStore, removeFavoriteStore, favoritesVerify } = useFavoriteStore()
     
     let itemsPerPage = 6
     let seeMore = ref(false)
     let drinkId = ref('0')
     let drinks = useDrinks()
     let drinksPerPage = ref(Array.from(drinks.value).slice(0, itemsPerPage))
-    let favorites = useFavorite()
     let begin = ref(true)
     let previous = ref(true)
     let next = ref(false)
     let page = ref(0)
     let cocktail = ref()
-
+    
     watch(drinks, async (newDrinks) => {
         drinksPerPage.value = Array.from(newDrinks).slice(0, itemsPerPage)
     })
 
     async function addFavorite(drink: any) {
-        favorites.value.push(drink)
+        addFavoriteStore(drink)
         $toast.success(`${drink.strDrink} adicionado aos favoritos`)
     }
     async function removeFavorite(drink: any) {
-        favorites.value = favorites.value.filter(drinks => drinks.idDrink !== drink.idDrink)
+        removeFavoriteStore(drink)
         $toast.error(`${drink.strDrink} removido dos favoritos`)
     }
-    let favoritesVerify = (idDrink: string) => {
-        return favorites.value.find((drink: any) => drink.idDrink == idDrink) !== undefined
-    }
 
-    
     async function seeMoreEnable(cocktailId: string) {
         await getCocktailInformations(cocktailId)
         seeMore.value = seeMore.value && drinkId.value == cocktailId ? false: true,
         drinkId.value = cocktailId
     }
-
 
     async function getCocktailInformations(cocktailId: string) {
         try {
@@ -101,7 +96,6 @@
             $toast.error(`${errorsVerify(error)}`)
         }
     }
-
 
     async function pagination(value: number) {
         switch(value) {

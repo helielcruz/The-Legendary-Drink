@@ -25,6 +25,8 @@
 <script setup lang="ts">
 import { CocktailsRequests } from "../api/cocktail/requests/cocktails-requests";
     const { errorsVerify } = useErrors()
+    const favoriteStore = useFavoriteStore()
+    const { favorites } = storeToRefs(favoriteStore)
     
     let selectedCategorie = ref('Other / Unknown')
     let search = ref('')
@@ -35,8 +37,6 @@ import { CocktailsRequests } from "../api/cocktail/requests/cocktails-requests";
     onMounted(()=> getDrinksByCategory())
 
     let drinks = useDrinks()
-    let drinksCopy = ref(drinks.value)
-    let favorites = useFavorite()
 
     let Cocktails = new CocktailsRequests()
     
