@@ -23,6 +23,9 @@
     $ git clone https://github.com/helielcruz/The-Legendary-Drink.git
 ```
  ```bash
+    $ cd The-Legendary-Drink
+```
+ ```bash
     $ npm install --global yarn
 ```
  ```bash
