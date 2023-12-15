@@ -3,7 +3,7 @@
         <UContainer class="w-full flex flex-wrap justify-center space-x-6 p-4">
             <UContainer class="border-solid border-2 rounded-full bg-transparent pt-1 pb-1 border-violet-400 placeholder-slate-400 font-thin m-2">
                 <select v-model="selectedCategorie" class="border-0 bg-transparent outline-none" @change="getDrinksByCategory()">
-                    <option class="text-slate-400 bg-zinc-800" value="" :disabled="true">Categorias</option>
+                    <option class="text-slate-400 bg-zinc-800" value="Favorites" :disabled="favorites.length < 1">Favorites</option>
                     <option class="text-slate-400 bg-zinc-800" v-for="categorie of categories" :key="categorie" :value="categorie">{{ categorie }}</option>
                 </select>
             </UContainer>
@@ -34,6 +34,7 @@ import { CocktailsRequests } from "../api/cocktail/requests/cocktails-requests";
     onMounted(()=> getDrinksByCategory())
 
     let drinks = useDrinks()
+    let favorites = useFavorite()
 
     let Cocktails = new CocktailsRequests()
     
@@ -46,7 +47,7 @@ import { CocktailsRequests } from "../api/cocktail/requests/cocktails-requests";
 
     async function getDrinksByCategory() {
         try{
-            drinks.value = (await Cocktails.filterByCategory(selectedCategorie.value)).data.drinks
+            drinks.value = selectedCategorie.value === 'Favorites'? favorites.value : (await Cocktails.filterByCategory(selectedCategorie.value)).data.drinks
         } catch (error: any){
             $toast.error(`${errorsVerify(error)}`)
         }

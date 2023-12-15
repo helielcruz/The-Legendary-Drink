@@ -71,7 +71,6 @@
         drinksPerPage.value = Array.from(newDrinks).slice(0, itemsPerPage)
     })
 
-
     async function addFavorite(drink: any) {
         favorites.value.push(drink)
         $toast.success(`${drink.strDrink} adicionado aos favoritos`)
