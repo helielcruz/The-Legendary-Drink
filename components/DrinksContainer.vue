@@ -71,6 +71,7 @@
         drinksPerPage.value = Array.from(newDrinks).slice(0, itemsPerPage)
     })
 
+
     async function addFavorite(drink: any) {
         favorites.value.push(drink)
         $toast.success(`${drink.strDrink} adicionado aos favoritos`)
@@ -82,12 +83,14 @@
     let favoritesVerify = (idDrink: string) => {
         return favorites.value.find((drink: any) => drink.idDrink == idDrink) !== undefined
     }
+
     
     async function seeMoreEnable(cocktailId: string) {
         await getCocktailInformations(cocktailId)
         seeMore.value = seeMore.value && drinkId.value == cocktailId ? false: true,
         drinkId.value = cocktailId
     }
+
 
     async function getCocktailInformations(cocktailId: string) {
         try {
@@ -96,6 +99,7 @@
             $toast.error(`${errorsVerify(error)}`)
         }
     }
+
 
     async function pagination(value: number) {
         switch(value) {
@@ -124,6 +128,7 @@
                 }
         }
     }
+    
     function slicePage(page: number) {
         let start = page * itemsPerPage;
         let end = start + itemsPerPage;
