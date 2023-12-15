@@ -1,6 +1,6 @@
 <template>
     <div>
-        <UContainer>
+        <UContainer v-if="drinksPerPage.length > 0">
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 bg-transparent border-solid border-2 rounded-md pt-1 pb-1 border-violet-400">
                 <div class="flex flex-col h-full m-2 p-2" v-for="drink of drinksPerPage" :key="drink.idDrink">
                     <div class=" font-bold text-slate-400  shadow-black " >
@@ -45,6 +45,9 @@
                     Next <font-awesome-icon icon="fa-solid fa-chevron-right" />
                 </button>           
             </div>
+        </UContainer>
+        <UContainer v-else>
+            <h2 class=" text-5xl">No Results</h2>
         </UContainer>
     </div>
 </template>

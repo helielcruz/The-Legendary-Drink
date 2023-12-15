@@ -15,6 +15,7 @@
                     class=" border-0 bg-transparent outline-none"
                     v-model="search"
                     placeholder="Pesquisar"
+                    @input="getDrinksDynamically()"
                 >
             </UContainer>
         </UContainer>
@@ -34,6 +35,7 @@ import { CocktailsRequests } from "../api/cocktail/requests/cocktails-requests";
     onMounted(()=> getDrinksByCategory())
 
     let drinks = useDrinks()
+    let drinksCopy = ref(drinks.value)
     let favorites = useFavorite()
 
     let Cocktails = new CocktailsRequests()
@@ -49,6 +51,19 @@ import { CocktailsRequests } from "../api/cocktail/requests/cocktails-requests";
         try{
             drinks.value = selectedCategorie.value === 'Favorites'? favorites.value : (await Cocktails.filterByCategory(selectedCategorie.value)).data.drinks
         } catch (error: any){
+            $toast.error(`${errorsVerify(error)}`)
+        }
+    }
+
+    async function getDrinksDynamically(){
+        try {
+            if(search.value){
+                drinks.value = (await Cocktails.CocktailsByFirstLetter(search.value.split('')[0].trim())).data.drinks
+                let cocktailsFiltered = drinks.value.filter((drinksFiltered: any) =>  drinksFiltered.strDrink.toUpperCase().startsWith(search.value.toUpperCase()))
+                drinks.value = cocktailsFiltered.length > 0? cocktailsFiltered : []
+            }
+            
+        } catch (error) {
             $toast.error(`${errorsVerify(error)}`)
         }
     }
