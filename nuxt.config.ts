@@ -4,5 +4,10 @@ export default defineNuxtConfig({
   css: ['@fortawesome/fontawesome-svg-core/styles.css'],
   modules: [
     '@nuxt/ui',
-  ]
+    '@pinia/nuxt',
+    '@pinia-plugin-persistedstate/nuxt'
+  ],
+  pinia: {
+    storesDirs: ['./stores/**']
+  }
 })
