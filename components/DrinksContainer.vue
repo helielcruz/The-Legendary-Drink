@@ -69,18 +69,18 @@
     let next = ref(false)
     let page = ref(0)
     let cocktail = ref()
-    
+
     watch(drinks, async (newDrinks) => {
         drinksPerPage.value = Array.from(newDrinks).slice(0, itemsPerPage)
     })
 
     async function addFavorite(drink: any) {
         addFavoriteStore(drink)
-        $toast.success(`${drink.strDrink} adicionado aos favoritos`)
+        $toast.success(`${drink.strDrink} added to favorites`)
     }
     async function removeFavorite(drink: any) {
         removeFavoriteStore(drink)
-        $toast.error(`${drink.strDrink} removido dos favoritos`)
+        $toast.error(`${drink.strDrink} removed of the favorites`)
     }
 
     async function seeMoreEnable(cocktailId: string) {

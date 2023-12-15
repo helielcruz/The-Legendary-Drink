@@ -28,7 +28,7 @@ import { CocktailsRequests } from "../api/cocktail/requests/cocktails-requests";
     const favoriteStore = useFavoriteStore()
     const { favorites } = storeToRefs(favoriteStore)
     
-    let selectedCategorie = ref('Other / Unknown')
+    let selectedCategorie = ref('Shake')
     let search = ref('')
     let categories = ref([])
 
