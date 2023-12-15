@@ -16,4 +16,8 @@ export class CocktailsRequests {
     async cocktailById (cocktailId: string): Promise<any> {
         return await Cocktail.get(`/lookup.php?i=${cocktailId}`)
     }
+
+    async CocktailsByFirstLetter(firstLetter: string): Promise<any> {
+        return await Cocktail.get(`/search.php?f=${firstLetter}`)
+    }
 }
