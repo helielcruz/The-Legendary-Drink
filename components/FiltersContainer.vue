@@ -7,12 +7,12 @@
                     <option class="text-slate-400 bg-zinc-800" v-for="categorie of categories" :key="categorie" :value="categorie">{{ categorie }}</option>
                 </select>
             </UContainer>
-            <UContainer  class="border-solid border-2 rounded-full bg-transparent p-1 border-violet-400 placeholder-slate-400 font-thin m-2">
+            <UContainer  class=" border-solid border-2 rounded-full bg-transparent p-1 border-violet-400 placeholder-slate-400 font-thin m-2">
                 <font-awesome-icon
                     class="ml-2 mr-2"
                     icon="fa-solid fa-magnifying-glass" />
                 <input 
-                    class="border-0 bg-transparent outline-none"
+                    class=" border-0 bg-transparent outline-none"
                     v-model="search"
                     placeholder="Pesquisar"
                 >
@@ -23,9 +23,13 @@
 
 <script setup lang="ts">
 import { CocktailsRequests } from "../api/cocktail/requests/cocktails-requests";
+    const { errorsVerify } = useErrors()
     
     let selectedCategorie = ref('Other / Unknown')
     let search = ref('')
+    let categories = ref([])
+
+    const { $toast } = useNuxtApp()
 
     onMounted(()=> getDrinksByCategory())
 
@@ -33,11 +37,19 @@ import { CocktailsRequests } from "../api/cocktail/requests/cocktails-requests";
 
     let Cocktails = new CocktailsRequests()
     
-    let categories = (await Cocktails.categoriesList()).data.drinks.map((item: any) => item.strCategory)
+    try {    
+        categories.value = (await Cocktails.categoriesList()).data.drinks.map((item: any) => item.strCategory)
+    } catch (error: any) {
+        $toast.error(`${errorsVerify(error)}`)
+    }
 
 
     async function getDrinksByCategory() {
-        drinks.value = (await Cocktails.filterByCategory(selectedCategorie.value)).data.drinks
+        try{
+            drinks.value = (await Cocktails.filterByCategory(selectedCategorie.value)).data.drinks
+        } catch (error: any){
+            $toast.error(`${errorsVerify(error)}`)
+        }
     }
 
 

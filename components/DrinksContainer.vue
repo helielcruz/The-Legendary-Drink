@@ -53,7 +53,7 @@
     import { CocktailsRequests } from '../api/cocktail/requests/cocktails-requests'
 
     const { $toast } = useNuxtApp()
-    
+    const { errorsVerify } = useErrors()
     
     let itemsPerPage = 6
     let seeMore = ref(false)
@@ -90,7 +90,11 @@
     }
 
     async function getCocktailInformations(cocktailId: string) {
-        cocktail.value = await new CocktailsRequests().cocktailById(cocktailId)
+        try {
+            cocktail.value = await new CocktailsRequests().cocktailById(cocktailId)
+        } catch (error) {
+            $toast.error(`${errorsVerify(error)}`)
+        }
     }
 
     async function pagination(value: number) {
