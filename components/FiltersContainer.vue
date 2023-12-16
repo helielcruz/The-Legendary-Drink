@@ -14,7 +14,7 @@
                 <input 
                     class=" border-0 bg-transparent outline-none"
                     v-model="search"
-                    placeholder="Pesquisar"
+                    placeholder="Search"
                     @input="getDrinksDynamically()"
                 >
             </UContainer>
