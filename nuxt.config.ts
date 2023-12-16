@@ -5,9 +5,13 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/ui',
     '@pinia/nuxt',
-    '@pinia-plugin-persistedstate/nuxt'
+    '@pinia-plugin-persistedstate/nuxt',
+    '@nuxtjs/i18n',
   ],
   pinia: {
     storesDirs: ['./stores/**']
+  },
+  i18n: {
+    vueI18n: './locale/i18n.config.ts'
   }
 })
