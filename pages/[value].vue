@@ -1,6 +1,5 @@
 
-<script lang="" setup>
-    const { $toast } = useNuxtApp()
+<script lang="ts" setup>
 
     definePageMeta({
         middleware: 'value'
