@@ -25,6 +25,7 @@
 <script setup lang="ts">
 import { CocktailsRequests } from "../api/cocktail/requests/cocktails-requests";
     const { errorsVerify } = useErrors()
+    const drinksAll = useDrinksAll()
     const favoriteStore = useFavoriteStore()
     const { favorites } = storeToRefs(favoriteStore)
     
@@ -58,7 +59,7 @@ import { CocktailsRequests } from "../api/cocktail/requests/cocktails-requests";
     async function getDrinksDynamically(){
         try {
             if(search.value){
-                drinks.value = (await Cocktails.CocktailsByFirstLetter(search.value.split('')[0].trim())).data.drinks
+                drinks.value = await drinksAll
                 let cocktailsFiltered = drinks.value.filter((drinksFiltered: any) =>  drinksFiltered.strDrink.toUpperCase().startsWith(search.value.toUpperCase()))
                 drinks.value = cocktailsFiltered.length > 0? cocktailsFiltered : []
             }
