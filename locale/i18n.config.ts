@@ -2,7 +2,7 @@ import { pt, en } from "./index";
 
 export default defineI18nConfig(() => ({
     legacy: false,
-    locale: 'pt',
+    locale: 'en',
     messages: {
       pt,
       en
