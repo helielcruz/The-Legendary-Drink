@@ -63,6 +63,7 @@
     let seeMore = ref(false)
     let drinkId = ref('0')
     let drinks = useDrinks()
+    let selectedCategorie = useCategory()
     let drinksPerPage = ref(Array.from(drinks.value).slice(0, itemsPerPage))
     let begin = ref(true)
     let previous = ref(true)
@@ -72,6 +73,11 @@
 
     watch(drinks, async (newDrinks) => {
         drinksPerPage.value = Array.from(newDrinks).slice(0, itemsPerPage)
+    })
+    watch(selectedCategorie, async () => {
+        page.value = 0
+        begin.value = true
+        next.value = false
     })
 
     async function addFavorite(drink: any) {
