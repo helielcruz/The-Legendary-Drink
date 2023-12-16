@@ -62,6 +62,8 @@ import { CocktailsRequests } from "../api/cocktail/requests/cocktails-requests";
                 drinks.value = await drinksAll
                 let cocktailsFiltered = drinks.value.filter((drinksFiltered: any) =>  drinksFiltered.strDrink.toUpperCase().startsWith(search.value.toUpperCase()))
                 drinks.value = cocktailsFiltered.length > 0? cocktailsFiltered : []
+            }else{
+                await getDrinksByCategory()
             }
             
         } catch (error) {
