@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <UContainer>
         <FiltersContainer/>
         
         <DrinksContainer/>
-    </div>
+    </UContainer>
 </template>
 
 <script lang="ts" setup>
