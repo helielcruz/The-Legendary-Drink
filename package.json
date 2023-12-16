@@ -24,6 +24,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/vue-fontawesome": "^3.0.5",
     "@nuxt/ui": "^2.11.1",
+    "@nuxtjs/i18n": "^8.0.0-rc.11",
     "@pinia/nuxt": "^0.5.1",
     "axios": "^1.6.2",
     "pinia": "^2.1.7",
