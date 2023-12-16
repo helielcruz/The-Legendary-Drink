@@ -3,7 +3,7 @@
         <UContainer class="w-full flex flex-wrap justify-center space-x-6 p-4">
             <UContainer class="border-solid border-2 rounded-full bg-transparent pt-1 pb-1 border-violet-400 placeholder-slate-400 font-thin m-2">
                 <select v-model="selectedCategorie" class="border-0 bg-transparent outline-none" @change="getDrinksByCategory()">
-                    <option class="text-slate-400 bg-zinc-800" value="Favorites" :disabled="favorites.length < 1">Favorites</option>
+                    <option class="text-slate-400 bg-zinc-800" value="Favorites" :disabled="favorites.length < 1">{{ $t('favorites') }}</option>
                     <option class="text-slate-400 bg-zinc-800" v-for="categorie of categories" :key="categorie" :value="categorie">{{ categorie }}</option>
                 </select>
             </UContainer>
@@ -14,7 +14,7 @@
                 <input 
                     class=" border-0 bg-transparent outline-none"
                     v-model="search"
-                    placeholder="Search"
+                    :placeholder="$t('search')"
                     @input="getDrinksDynamically()"
                 >
             </UContainer>

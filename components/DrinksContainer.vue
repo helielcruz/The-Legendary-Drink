@@ -11,7 +11,7 @@
                         <div
                             :style="{ backgroundImage: `url(${cocktail.data.drinks[0].strDrinkThumb})` }" 
                             class="h-full p-4 max-w-full flex flex-col rounded-t-md text-zinc-800">
-                            <span class=" z-10 font-semibold">Instructions: {{cocktail.data.drinks[0].strInstructions}}</span>
+                            <span class=" z-10 font-semibold">{{$t('instructions')}}: {{cocktail.data.drinks[0].strInstructions}}</span>
                         </div>
                         <div class="rounded-r-lg absolute inset-0 bg-white bg-opacity-50"></div>
                     </UContainer >
@@ -22,7 +22,7 @@
                             <button
                                 @click="seeMoreEnable(drink.idDrink)"
                                 class=" col-start-1 col-span-5 p-4 max-w-full grid hover:bg-emerald-600 text-violet-400 bg-transparent border-solid border-2 pt-1 pb-1 border-violet-400">
-                                <h4 class="">{{ seeMore && drinkId == drink.idDrink? 'See less' : 'See more' }}</h4>
+                                <h4 class="">{{ seeMore && drinkId == drink.idDrink? $t('seeLess') : $t('seeMore') }}</h4>
                                 
                             </button>
                             <font-awesome-icon v-if="favoritesVerify(drink.idDrink)" @click="removeFavorite(drink)" class="col-start-6 inset-0 z-10 text-2xl text-rose-600" icon="fa-solid fa-heart" />
@@ -34,15 +34,15 @@
             <div>
                 <button class="bg-transparent  hover:bg-emerald-600 text-violet-400 border-2 border-solid border-violet-400 m-2 p-2" 
                     @click="pagination(1)" :disabled="begin">
-                    <font-awesome-icon icon="fa-solid fa-backward-step" /> Begin
+                    <font-awesome-icon icon="fa-solid fa-backward-step" /> {{ $t('begin') }}
                 </button>
                 <button class="bg-transparent  hover:bg-emerald-600 text-violet-400 border-2 border-solid border-violet-400 m-2 p-2" 
                     @click="pagination(2)" :disabled="previous">
-                    <font-awesome-icon icon="fa-solid fa-chevron-left" /> Previous
+                    <font-awesome-icon icon="fa-solid fa-chevron-left" /> {{ $t('previous') }}
                 </button>
                 <button class="bg-transparent  hover:bg-emerald-600 text-violet-400 border-2 border-solid border-violet-400 m-2 p-2" 
                     @click="pagination(3)" :disabled="next">
-                    Next <font-awesome-icon icon="fa-solid fa-chevron-right" />
+                    {{ $t('next') }} <font-awesome-icon icon="fa-solid fa-chevron-right" />
                 </button>           
             </div>
         </UContainer>
