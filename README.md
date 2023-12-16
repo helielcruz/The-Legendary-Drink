@@ -18,6 +18,7 @@
 ## 🍹 HOW TO RUN THE PROJECT?
 
 - Is recommended to use yarn for compatibility questions
+- Use Node >= v20.10.0
 
  ```bash
     $ git clone https://github.com/helielcruz/The-Legendary-Drink.git
