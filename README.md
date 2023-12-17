@@ -62,6 +62,10 @@
 #### <a href="https://i18n.nuxtjs.org/getting-started/setup">https://i18n.nuxtjs.org/getting-started/setup</a>
     Internationaization library
 
+### Axios
+#### <a href="https://axios-http.com/docs/intro">https://axios-http.com/docs/intro</a>
+    Http request library
+
 #### The interface was designed to offer intuitive usability to the user, without causing visual pollution or deviating from the theme.
 
 
