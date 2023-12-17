@@ -33,6 +33,7 @@ import { CocktailsRequests } from "../api/cocktail/requests/cocktails-requests";
     let selectedCategorie = useCategory()
     let search = ref('')
     let categories = ref([])
+    let loading = useLoadingCarrossel()
 
     const { $toast } = useNuxtApp()
 
@@ -42,17 +43,23 @@ import { CocktailsRequests } from "../api/cocktail/requests/cocktails-requests";
 
     let Cocktails = new CocktailsRequests()
     
-    try {    
+    try {
+        loading.value = true    
         categories.value = (await Cocktails.categoriesList()).data.drinks.map((item: any) => item.strCategory)
+        loading.value = false
     } catch (error: any) {
+        loading.value = false
         $toast.error(`${errorsVerify(error, locale)}`)
     }
 
 
     async function getDrinksByCategory() {
         try{
+            loading.value = true
             drinks.value = selectedCategorie.value === 'Favorites'? favorites.value : (await Cocktails.filterByCategory(selectedCategorie.value)).data.drinks
+            loading.value = false
         } catch (error: any){
+            loading.value = false
             $toast.error(`${errorsVerify(error, locale)}`)
         }
     }
@@ -60,14 +67,19 @@ import { CocktailsRequests } from "../api/cocktail/requests/cocktails-requests";
     async function getDrinksDynamically(){
         try {
             if(search.value){
+                loading.value = true
                 drinks.value = await drinksAll
+                loading.value = false
                 let cocktailsFiltered = drinks.value.filter((drinksFiltered: any) =>  drinksFiltered.strDrink.toUpperCase().includes(search.value.toUpperCase()))
                 drinks.value = cocktailsFiltered.length > 0? cocktailsFiltered : []
             }else{
+                loading.value = true
                 await getDrinksByCategory()
+                loading.value = false
             }
             
         } catch (error) {
+            loading.value = false
             $toast.error(`${errorsVerify(error, locale)}`)
         }
     }

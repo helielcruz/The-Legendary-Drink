@@ -1,6 +1,7 @@
 <template>
     <div>
         <UContainer v-if="drinksPerPage.length > 0">
+            <UProgress class="mb-2" color="green" size="sm" v-if="loading" animation="carousel" />
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 bg-transparent border-solid border-2 rounded-md pt-1 pb-1 border-violet-400">
                 <div class="flex flex-col h-full m-2 p-2" v-for="drink of drinksPerPage" :key="drink.idDrink">
                     <div class=" font-bold text-slate-400  shadow-black " >
@@ -64,6 +65,7 @@
     let seeMore = ref(false)
     let drinkId = ref('0')
     let drinks = useDrinks()
+    let loading = useLoadingCarrossel()
     let selectedCategorie = useCategory()
     let drinksPerPage = ref(Array.from(drinks.value).slice(0, itemsPerPage))
     let begin = ref(true)
@@ -91,15 +93,26 @@
     }
 
     async function seeMoreEnable(cocktailId: string) {
-        await getCocktailInformations(cocktailId)
-        seeMore.value = seeMore.value && drinkId.value == cocktailId ? false: true,
-        drinkId.value = cocktailId
+        try {
+            loading.value = true
+            await getCocktailInformations(cocktailId)
+            loading.value = false
+            seeMore.value = seeMore.value && drinkId.value == cocktailId ? false: true,
+            drinkId.value = cocktailId
+        } catch (error) {
+            loading.value = false
+            $toast.error(`${errorsVerify(error, locale)}`)
+        }
+        
     }
 
     async function getCocktailInformations(cocktailId: string) {
         try {
+            loading.value = true
             cocktail.value = await new CocktailsRequests().cocktailById(cocktailId)
+            loading.value = false
         } catch (error) {
+            loading.value = false
             $toast.error(`${errorsVerify(error, locale)}`)
         }
     }
