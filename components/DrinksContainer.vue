@@ -48,7 +48,7 @@
             </div>
         </UContainer>
         <UContainer v-else>
-            <h2 class=" text-5xl">No Results</h2>
+            <h2 class=" text-5xl">{{$t('noResults')}}</h2>
         </UContainer>
     </div>
 </template>

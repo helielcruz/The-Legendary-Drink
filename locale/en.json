@@ -11,6 +11,7 @@
     "developedBy": "Developed by",
     "addedToFavorites": "added to favorites",
     "removedOfTheFavorites": "removed of the favorites",
+    "noResults": "No Results",
     "httpErrors": {
       "400": "Error: Bad Request!",
       "401": "Error: Unauthorized!",

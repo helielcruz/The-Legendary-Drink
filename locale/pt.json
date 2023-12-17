@@ -11,6 +11,7 @@
     "developedBy": "Desenvolvido por",
     "addedToFavorites": "adicionado aos favoritos",
     "removedOfTheFavorites": "removido dos favoritos",
+    "noResults": "Sem resultados",
     "httpErrors": {
         "400": "Erro: Requisição incorreta!",
         "401": "Erro: Não autorizado!",
