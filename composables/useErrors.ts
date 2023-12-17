@@ -16,7 +16,10 @@ export default function () {
     const codeErros = ['400', '401', '403', '404', '500', '501', '502', '503', '504', '505']
 
     const errorsVerify = (error: any) => {
-        return codeErros.filter((code: string) => error.message?.includes(code)).map((code) => responseErrors[code])
+        
+        const response = codeErros.filter((code: string) => error.status?.includes(code)).map((code) => responseErrors[code])
+        if(response.length !== 0) return response
+        else return error.message
     }
 
     return { errorsVerify }
