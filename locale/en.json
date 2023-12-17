@@ -8,6 +8,8 @@
     "begin": "Begin",
     "previous": "Previous",
     "next": "Next",
-    "developedBy": "Developed by"
+    "developedBy": "Developed by",
+    "addedToFavorites": "added to favorites",
+    "removedOfTheFavorites": "removed of the favorites"
   }
 }

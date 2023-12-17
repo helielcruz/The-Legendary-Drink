@@ -54,6 +54,7 @@
 
 <script lang="ts" setup>
     import { CocktailsRequests } from '../api/cocktail/requests/cocktails-requests'
+    const { t } = useI18n()
 
     const { $toast } = useNuxtApp()
     const { errorsVerify } = useErrors()
@@ -82,11 +83,11 @@
 
     async function addFavorite(drink: any) {
         addFavoriteStore(drink)
-        $toast.success(`${drink.strDrink} added to favorites`)
+        $toast.success(`${drink.strDrink} ${t('addedToFavorites')}`)
     }
     async function removeFavorite(drink: any) {
         removeFavoriteStore(drink)
-        $toast.error(`${drink.strDrink} removed of the favorites`)
+        $toast.error(`${drink.strDrink} ${t('removedOfTheFavorites')}`)
     }
 
     async function seeMoreEnable(cocktailId: string) {
