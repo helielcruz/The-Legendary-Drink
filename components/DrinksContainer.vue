@@ -33,15 +33,15 @@
                 </div>           
             </div>
             <div>
-                <button class="bg-transparent  hover:bg-emerald-600 text-violet-400 border-2 border-solid border-violet-400 m-2 p-2" 
+                <button class="bg-transparent  hover:bg-emerald-600 text-violet-400 border-2 border-solid border-violet-400 m-2 p-1 pl-4 pr-4" 
                     @click="pagination(1)" :disabled="begin">
                     <font-awesome-icon icon="fa-solid fa-backward-step" /> {{ $t('begin') }}
                 </button>
-                <button class="bg-transparent  hover:bg-emerald-600 text-violet-400 border-2 border-solid border-violet-400 m-2 p-2" 
+                <button class="bg-transparent  hover:bg-emerald-600 text-violet-400 border-2 border-solid border-violet-400 m-2 p-1 pl-4 pr-4" 
                     @click="pagination(2)" :disabled="previous">
                     <font-awesome-icon icon="fa-solid fa-chevron-left" /> {{ $t('previous') }}
                 </button>
-                <button class="bg-transparent  hover:bg-emerald-600 text-violet-400 border-2 border-solid border-violet-400 m-2 p-2" 
+                <button class="bg-transparent  hover:bg-emerald-600 text-violet-400 border-2 border-solid border-violet-400 m-2 p-1 pl-4 pr-4" 
                     @click="pagination(3)" :disabled="next">
                     {{ $t('next') }} <font-awesome-icon icon="fa-solid fa-chevron-right" />
                 </button>           
