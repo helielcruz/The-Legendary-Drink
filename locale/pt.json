@@ -10,6 +10,21 @@
     "next": "Próxima",
     "developedBy": "Desenvolvido por",
     "addedToFavorites": "adicionado aos favoritos",
-    "removedOfTheFavorites": "removido dos favoritos"
+    "removedOfTheFavorites": "removido dos favoritos",
+    "httpErrors": {
+        "400": "Erro: Requisição incorreta!",
+        "401": "Erro: Não autorizado!",
+        "403": "Erro: Requisição proibida!",
+        "404": "Erro: Não encontrado!",
+        "500": "Erro: Erro interno do servidor!",
+        "501": "Erro: Não implementado!",
+        "502": "Erro: Erro no Gateway!",
+        "503": "Erro: Serviço indisponível!",
+        "504": "Erro: Tempo de conexão esgotado!",
+        "505": "Erro: Versão HTTP não suportada!"
+    },
+    "genericErrors": {
+        "Network Error": "Falha de conexão!"
+    }
   }
 }

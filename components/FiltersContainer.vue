@@ -24,6 +24,7 @@
 
 <script setup lang="ts">
 import { CocktailsRequests } from "../api/cocktail/requests/cocktails-requests";
+    const { locale } = useI18n()
     const { errorsVerify } = useErrors()
     const drinksAll = useDrinksAll()
     const favoriteStore = useFavoriteStore()
@@ -44,7 +45,7 @@ import { CocktailsRequests } from "../api/cocktail/requests/cocktails-requests";
     try {    
         categories.value = (await Cocktails.categoriesList()).data.drinks.map((item: any) => item.strCategory)
     } catch (error: any) {
-        $toast.error(`${errorsVerify(error)}`)
+        $toast.error(`${errorsVerify(error, locale)}`)
     }
 
 
@@ -52,7 +53,7 @@ import { CocktailsRequests } from "../api/cocktail/requests/cocktails-requests";
         try{
             drinks.value = selectedCategorie.value === 'Favorites'? favorites.value : (await Cocktails.filterByCategory(selectedCategorie.value)).data.drinks
         } catch (error: any){
-            $toast.error(`${errorsVerify(error)}`)
+            $toast.error(`${errorsVerify(error, locale)}`)
         }
     }
 
@@ -67,7 +68,7 @@ import { CocktailsRequests } from "../api/cocktail/requests/cocktails-requests";
             }
             
         } catch (error) {
-            $toast.error(`${errorsVerify(error)}`)
+            $toast.error(`${errorsVerify(error, locale)}`)
         }
     }
 

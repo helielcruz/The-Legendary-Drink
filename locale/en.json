@@ -10,6 +10,21 @@
     "next": "Next",
     "developedBy": "Developed by",
     "addedToFavorites": "added to favorites",
-    "removedOfTheFavorites": "removed of the favorites"
+    "removedOfTheFavorites": "removed of the favorites",
+    "httpErrors": {
+      "400": "Error: Bad Request!",
+      "401": "Error: Unauthorized!",
+      "403": "Error: Forbidden!",
+      "404": "Error: Not Found!",
+      "500": "Error: Internal Server Error!",
+      "501": "Error: Not Implemented!",
+      "502": "Error: Bad Gateway!",
+      "503": "Error: Service Unavailable!",
+      "504": "Error: Gateway Time-out!",
+      "505": "Error: HTTP Version Not Supported!"
+    },
+    "genericErrors": {
+      "Network Error": "Network Error"
+    }
   }
 }

@@ -54,7 +54,7 @@
 
 <script lang="ts" setup>
     import { CocktailsRequests } from '../api/cocktail/requests/cocktails-requests'
-    const { t } = useI18n()
+    const { t, locale } = useI18n()
 
     const { $toast } = useNuxtApp()
     const { errorsVerify } = useErrors()
@@ -100,7 +100,7 @@
         try {
             cocktail.value = await new CocktailsRequests().cocktailById(cocktailId)
         } catch (error) {
-            $toast.error(`${errorsVerify(error)}`)
+            $toast.error(`${errorsVerify(error, locale)}`)
         }
     }
 
