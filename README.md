@@ -58,6 +58,10 @@
 #### <a href="https://vue3-toastify.js-bridge.com/get-started/installation.html">https://vue3-toastify.js-bridge.com/get-started/installation.html</a>
     Notifications library
 
+### nuxt/i18n
+#### <a href="https://i18n.nuxtjs.org/getting-started/setup">https://i18n.nuxtjs.org/getting-started/setup</a>
+    Internationaization library
+
 #### The interface was designed to offer intuitive usability to the user, without causing visual pollution or deviating from the theme.
 
 
