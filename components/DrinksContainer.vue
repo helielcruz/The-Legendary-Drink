@@ -10,9 +10,15 @@
                     <UContainer class=" relative m-0 pl-0 pr-0 p-0 h-5/6 lg:pr-0 lg:pl-0 transition-all transform duration-500 ease-in-out opacity-100"
                         v-if="seeMore && drinkId == drink.idDrink">
                         <div
+                            v-if="cocktail"
                             :style="{ backgroundImage: `url(${cocktail.data.drinks[0].strDrinkThumb})` }" 
                             class="h-full p-4 max-w-full flex flex-col rounded-t-md text-zinc-800">
                             <span class=" z-10 font-semibold">{{$t('instructions')}}: {{cocktail.data.drinks[0].strInstructions}}</span>
+                        </div>
+                        <div
+                            v-else
+                            class=" h-full p-4 max-w-full grid grid-rows-3 grid-cols-5 rounded-t-md bg-slate-500 text-zinc-800">
+                            <font-awesome-icon class=" z-10 text-4xl row-start-2 col-start-3 justify-center align-middle place-items-center" icon="fa-solid fa-spinner" spin />
                         </div>
                         <div class="rounded-r-lg absolute inset-0 bg-white bg-opacity-50"></div>
                     </UContainer >
@@ -94,13 +100,11 @@
 
     async function seeMoreEnable(cocktailId: string) {
         try {
-            loading.value = true
-            await getCocktailInformations(cocktailId)
-            loading.value = false
+            cocktail.value = ''
+            getCocktailInformations(cocktailId)
             seeMore.value = seeMore.value && drinkId.value == cocktailId ? false: true,
             drinkId.value = cocktailId
         } catch (error) {
-            loading.value = false
             $toast.error(`${errorsVerify(error, locale)}`)
         }
         
@@ -108,11 +112,9 @@
 
     async function getCocktailInformations(cocktailId: string) {
         try {
-            loading.value = true
+            cocktail.value = ''
             cocktail.value = await new CocktailsRequests().cocktailById(cocktailId)
-            loading.value = false
         } catch (error) {
-            loading.value = false
             $toast.error(`${errorsVerify(error, locale)}`)
         }
     }
