@@ -53,8 +53,9 @@
                 </button>           
             </div>
         </UContainer>
-        <UContainer v-else>
-            <h2 class=" text-5xl">{{$t('noResults')}}</h2>
+        <UContainer v-else class="h-full p-4 max-w-full grid grid-rows-3 grid-cols-9 rounded-t-md">
+            <h2 v-if="!loading" class=" text-5xl h-full p-4 max-w-full flex flex-col rounded-t-md ">{{$t('noResults')}}</h2>
+            <font-awesome-icon v-else class=" z-10 text-4xl row-start-2 col-start-5 place-items-center" icon="fa-solid fa-spinner" spin />
         </UContainer>
     </div>
 </template>
@@ -80,7 +81,7 @@
     let page = ref(0)
     let cocktail = ref()
 
-    watch(drinks, async (newDrinks) => {
+    watch(drinks, (newDrinks) => {
         drinksPerPage.value = Array.from(newDrinks).slice(0, itemsPerPage)
     })
     watch(selectedCategorie, async () => {
