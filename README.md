@@ -1,4 +1,4 @@
-<div style="background-color: #1f1f20;">
+<div style="background-color: #19191a; padding: 2%;">
 # The Legendary Drink
 <h1 align="center">
     <img src="./assets//images/_c6668a1a-b7c3-48e5-be1e-67501f56d759-removebg-preview (1).png">
@@ -13,7 +13,6 @@
 - List by favorites
 - Data persistence in cookies
 - Pagination every 6 items
-
 
 ## 🍹 HOW TO RUN THE PROJECT?
 
