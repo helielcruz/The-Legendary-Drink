@@ -1,5 +1,5 @@
+<div style="background-color: #1f1f20;">
 # The Legendary Drink
-<body style="background-color: #333;">
 <h1 align="center">
     <img src="./assets//images/_c6668a1a-b7c3-48e5-be1e-67501f56d759-removebg-preview (1).png">
 
@@ -80,4 +80,4 @@
 
 ## 🧾Licence
 - This project is under the MIT licence. See the licence for more details.
-</body>
+</div>
