@@ -1,7 +1,7 @@
 <div style="background-color: #19191a; padding: 2%;">
 # The Legendary Drink
 <h1 align="center">
-    <img src="./assets//images/_c6668a1a-b7c3-48e5-be1e-67501f56d759-removebg-preview (1).png">
+    <img style="background-color: #19191a;" src="./assets//images/_c6668a1a-b7c3-48e5-be1e-67501f56d759-removebg-preview (1).png">
 
 ## <h2>About</h2>
 # This project aims to show the drinks available in the <a href="https://www.thecocktaildb.com/api.php">TheCocktailDB</a> API and has some features:
