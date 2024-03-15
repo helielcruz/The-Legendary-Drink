@@ -2,8 +2,8 @@
     <div>
         <UContainer class="grid grid-cols-6 place-items-center">
             <img class=" w-40 col-span-2" src="../assets/images/_c6668a1a-b7c3-48e5-be1e-67501f56d759-removebg-preview (1).png" alt="">
-            <div class=" col-start-5 h-10 rounded-md">
-                <select v-model="locale" class=" bg-transparent outline-none p-2">
+            <div class="border  border-solid border-violet-400 col-start-5 h-10 rounded-md">
+                <select v-model="locale" class=" text-violet-400 bg-transparent outline-none p-2">
                     <option  class=" bg-zinc-200 text-zinc-400" value="en" selected>EN</option>
                     <option v-for="language of languages" :key="language" class=" bg-zinc-200 text-zinc-400" :value="language">{{ language.toLocaleUpperCase() }}</option>
                 </select>
